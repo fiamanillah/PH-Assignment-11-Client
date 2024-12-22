@@ -1,84 +1,84 @@
 const colors = {
-    background: '#ffffff', // White
-    foreground: '#333333', // Dark Gray
+    background: '#f7f8fa', // Very Light Gray
+    foreground: '#2d2d2d', // Darker Gray for better contrast
     card: {
-        DEFAULT: '#f8f9fa', // Light Gray
-        foreground: '#212529', // Dark Gray
+        DEFAULT: '#ffffff', // White
+        foreground: '#3c3c3c', // Darker Gray
     },
     popover: {
-        DEFAULT: '#e9ecef', // Light Gray
-        foreground: '#495057', // Medium Gray
+        DEFAULT: '#f1f3f5', // Light Gray
+        foreground: '#2d3436', // Slightly Darker Gray
     },
     primary: {
-        DEFAULT: '#0d6efd', // Soft Blue
+        DEFAULT: '#007bff', // Brighter Blue
         foreground: '#ffffff', // White
     },
     secondary: {
-        DEFAULT: '#FFDD57', // Warm Yellow
-        foreground: '#ffffff', // White
+        DEFAULT: '#ffcc00', // Bright Yellow
+        foreground: '#333333', // Dark Gray for better readability
     },
     muted: {
-        DEFAULT: '#ADB5BD', // Light Gray
-        foreground: '#6c757d', // Medium Gray
+        DEFAULT: '#ced4da', // Soft Gray
+        foreground: '#495057', // Medium Gray
     },
     accent: {
-        DEFAULT: '#6DBE45', // Fresh Green
+        DEFAULT: '#4caf50', // Bright Green
         foreground: '#ffffff', // White
     },
     destructive: {
-        DEFAULT: '#F56262', // Soft Coral
+        DEFAULT: '#dc3545', // Red
         foreground: '#ffffff', // White
     },
-    border: '#dee2e6', // Light Gray
-    input: '#e9ecef', // Light Gray
-    ring: '#6DBE45', // Fresh Green
+    border: '#dcdfe3', // Soft Gray
+    input: '#f1f3f5', // Light Gray
+    ring: '#4caf50', // Bright Green
     chart: {
-        1: '#F56262', // Soft Coral
-        2: '#FFA94D', // Light Orange
-        3: '#74C0FC', // Light Blue
-        4: '#63E6BE', // Light Green
-        5: '#FF922B', // Warm Orange
+        1: '#dc3545', // Red
+        2: '#ff9800', // Vibrant Orange
+        3: '#2196f3', // Bright Blue
+        4: '#4caf50', // Bright Green
+        5: '#ffc107', // Warm Yellow
     },
     dark: {
-        background: '#212529', // Dark Gray
-        foreground: '#f8f9fa', // Light Gray
+        background: '#1e1e1e', // Darker Gray
+        foreground: '#e4e6eb', // Light Gray
         card: {
-            DEFAULT: '#343a40', // Dark Gray
-            foreground: '#ced4da', // Light Gray
+            DEFAULT: '#292b2c', // Dark Gray
+            foreground: '#d6d8db', // Light Gray
         },
         popover: {
-            DEFAULT: '#495057', // Medium Gray
-            foreground: '#e9ecef', // Light Gray
+            DEFAULT: '#343a40', // Medium Gray
+            foreground: '#e4e6eb', // Light Gray
         },
         primary: {
-            DEFAULT: '#339af0', // Soft Blue
+            DEFAULT: '#1a73e8', // Brighter Blue
             foreground: '#ffffff', // White
         },
         secondary: {
-            DEFAULT: '#868e96', // Medium Gray
-            foreground: '#f8f9fa', // Light Gray
+            DEFAULT: '#6c757d', // Neutral Gray
+            foreground: '#e4e6eb', // Light Gray
         },
         muted: {
             DEFAULT: '#495057', // Medium Gray
-            foreground: '#adb5bd', // Light Gray
+            foreground: '#adb5bd', // Soft Gray
         },
         accent: {
-            DEFAULT: '#38d9a9', // Fresh Green
+            DEFAULT: '#2ecc71', // Vibrant Green
             foreground: '#ffffff', // White
         },
         destructive: {
-            DEFAULT: '#fa5252', // Red
+            DEFAULT: '#e74c3c', // Bright Red
             foreground: '#ffffff', // White
         },
-        border: '#343a40', // Dark Gray
+        border: '#3e444a', // Dark Gray
         input: '#495057', // Medium Gray
-        ring: '#38d9a9', // Fresh Green
+        ring: '#2ecc71', // Vibrant Green
         chart: {
-            1: '#fa5252', // Red
-            2: '#f59f00', // Orange
-            3: '#74c0fc', // Light Blue
-            4: '#63e6be', // Light Green
-            5: '#ff922b', // Warm Orange
+            1: '#e74c3c', // Bright Red
+            2: '#f39c12', // Bright Orange
+            3: '#3498db', // Bright Blue
+            4: '#2ecc71', // Vibrant Green
+            5: '#f1c40f', // Warm Yellow
         },
     },
 };
