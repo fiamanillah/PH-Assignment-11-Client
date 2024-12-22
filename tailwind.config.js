@@ -1,6 +1,7 @@
 import typography from '@tailwindcss/typography';
 import tailwindcssAnimate from 'tailwindcss-animate';
 import colors from './theme.config';
+import typo from './typography.config';
 /** @type {import('tailwindcss').Config} */
 export default {
     darkMode: ['class'], // Enables class-based dark mode
@@ -28,6 +29,7 @@ export default {
                 '4/3': '4 / 3',
             },
             colors: { ...colors },
+            typography: { ...typo },
         },
     },
     plugins: [typography, tailwindcssAnimate],

@@ -1,84 +1,84 @@
 const colors = {
-    background: '#ffffff',
-    foreground: '#333333',
+    background: '#ffffff', // White
+    foreground: '#333333', // Dark Gray
     card: {
-        DEFAULT: '#f8f9fa',
-        foreground: '#212529',
+        DEFAULT: '#f8f9fa', // Light Gray
+        foreground: '#212529', // Dark Gray
     },
     popover: {
-        DEFAULT: '#e9ecef',
-        foreground: '#495057',
+        DEFAULT: '#e9ecef', // Light Gray
+        foreground: '#495057', // Medium Gray
     },
     primary: {
-        DEFAULT: '#0d6efd',
-        foreground: '#ffffff',
+        DEFAULT: '#0d6efd', // Soft Blue
+        foreground: '#ffffff', // White
     },
     secondary: {
-        DEFAULT: '#6c757d',
-        foreground: '#ffffff',
+        DEFAULT: '#FFDD57', // Warm Yellow
+        foreground: '#ffffff', // White
     },
     muted: {
-        DEFAULT: '#adb5bd',
-        foreground: '#6c757d',
+        DEFAULT: '#ADB5BD', // Light Gray
+        foreground: '#6c757d', // Medium Gray
     },
     accent: {
-        DEFAULT: '#51cf66',
-        foreground: '#ffffff',
+        DEFAULT: '#6DBE45', // Fresh Green
+        foreground: '#ffffff', // White
     },
     destructive: {
-        DEFAULT: '#ff6b6b',
-        foreground: '#ffffff',
+        DEFAULT: '#F56262', // Soft Coral
+        foreground: '#ffffff', // White
     },
-    border: '#dee2e6',
-    input: '#e9ecef',
-    ring: '#51cf66',
+    border: '#dee2e6', // Light Gray
+    input: '#e9ecef', // Light Gray
+    ring: '#6DBE45', // Fresh Green
     chart: {
-        1: '#ff6b6b',
-        2: '#ffa94d',
-        3: '#74c0fc',
-        4: '#63e6be',
-        5: '#ff922b',
+        1: '#F56262', // Soft Coral
+        2: '#FFA94D', // Light Orange
+        3: '#74C0FC', // Light Blue
+        4: '#63E6BE', // Light Green
+        5: '#FF922B', // Warm Orange
     },
     dark: {
-        background: '#212529',
-        foreground: '#f8f9fa',
+        background: '#212529', // Dark Gray
+        foreground: '#f8f9fa', // Light Gray
         card: {
-            DEFAULT: '#343a40',
-            foreground: '#ced4da',
+            DEFAULT: '#343a40', // Dark Gray
+            foreground: '#ced4da', // Light Gray
         },
         popover: {
-            DEFAULT: '#495057',
-            foreground: '#e9ecef',
+            DEFAULT: '#495057', // Medium Gray
+            foreground: '#e9ecef', // Light Gray
         },
         primary: {
-            DEFAULT: '#339af0',
-            foreground: '#ffffff',
+            DEFAULT: '#339af0', // Soft Blue
+            foreground: '#ffffff', // White
         },
         secondary: {
-            DEFAULT: '#868e96',
-            foreground: '#f8f9fa',
+            DEFAULT: '#868e96', // Medium Gray
+            foreground: '#f8f9fa', // Light Gray
         },
         muted: {
-            DEFAULT: '#495057',
-            foreground: '#adb5bd',
+            DEFAULT: '#495057', // Medium Gray
+            foreground: '#adb5bd', // Light Gray
         },
         accent: {
-            DEFAULT: '#38d9a9',
-            foreground: '#ffffff',
+            DEFAULT: '#38d9a9', // Fresh Green
+            foreground: '#ffffff', // White
         },
         destructive: {
-            DEFAULT: '#fa5252',
-            foreground: '#ffffff',
+            DEFAULT: '#fa5252', // Red
+            foreground: '#ffffff', // White
         },
-        border: '#343a40',
-        input: '#495057',
-        ring: '#38d9a9',
+        border: '#343a40', // Dark Gray
+        input: '#495057', // Medium Gray
+        ring: '#38d9a9', // Fresh Green
         chart: {
-            1: '#fa5252',
-            2: '#f59f00',
-            3: '#74c0fc',
-            4: '#63e6be',
-            5: '#ff922b',
+            1: '#fa5252', // Red
+            2: '#f59f00', // Orange
+            3: '#74c0fc', // Light Blue
+            4: '#63e6be', // Light Green
+            5: '#ff922b', // Warm Orange
         },
     },
 };
