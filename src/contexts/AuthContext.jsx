@@ -24,6 +24,7 @@ const AuthContext = createContext({
 
 export default function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true); // Add loading state
 
     const updateUserProfile = async (displayName, photoURL) => {
         if (auth.currentUser) {
@@ -80,6 +81,7 @@ export default function AuthProvider({ children }) {
             await sendPasswordResetEmail(auth, email);
         } catch (error) {
             console.error('Error:', error);
+            throw error;
         }
     };
 
@@ -95,6 +97,7 @@ export default function AuthProvider({ children }) {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
+            setLoading(false); // Set loading to false once user state is determined
         });
 
         return () => unsubscribe();
@@ -102,6 +105,7 @@ export default function AuthProvider({ children }) {
 
     const authContextValue = {
         user,
+        loading, // Provide loading state to context
         updateUserProfile,
         registerWithEmail,
         loginWithGoogle,

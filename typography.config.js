@@ -54,10 +54,10 @@ const typo = {
                 '[class~="dark"] &': { color: colors.dark.primary.DEFAULT },
             },
             p: {
-                color: colors.muted.foreground,
+                color: colors.muted.DEFAULT,
                 fontSize: '1rem',
                 fontWeight: '400',
-                '[class~="dark"] &': { color: colors.dark.muted.foreground },
+                '[class~="dark"] &': { color: colors.dark.muted.DEFAULT },
             },
             span: {
                 color: colors.muted.foreground,

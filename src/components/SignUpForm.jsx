@@ -40,6 +40,11 @@ function SignupForm() {
         try {
             setGoogleLoading(true);
             await loginWithGoogle();
+            toast({
+                variant: 'success',
+                title: 'Success',
+                description: 'You have successfully signed up',
+            });
         } catch (error) {
             console.error('Error:', error);
             toast({
@@ -114,7 +119,7 @@ function SignupForm() {
     };
 
     return (
-        <div className="max-w-md mx-auto p-4 border border-muted dark:border-dark-muted rounded shadow bg-card dark:bg-dark-card">
+        <div className="max-w-md mx-auto p-4 ">
             <h1 className="text-2xl font-bold mb-4">Sign Up</h1>
             <form onSubmit={handleSignUp} className="space-y-2">
                 <div>
@@ -217,9 +222,6 @@ function SignupForm() {
                             I agree to the <Link to={'/terms'}>terms and conditions</Link>
                         </Label>
                     </div>
-                    <Link to={'reset-password'}>
-                        <Button variant="link">Forgot Password</Button>
-                    </Link>
                 </div>
                 <Button
                     type="submit"
@@ -239,8 +241,7 @@ function SignupForm() {
                     {googleLoading ? (
                         <Loader2 className="animate-spin h-5 w-5" />
                     ) : (
-                        <p className="inline-block mr-2">
-                            {' '}
+                        <p className="inline-block mr-2 text-foreground dark:text-dark-foregroundtext-foreground dark:text-dark-foreground">
                             <FcGoogle className="inline-block mr-2" />
                             Sign up with Google
                         </p>
