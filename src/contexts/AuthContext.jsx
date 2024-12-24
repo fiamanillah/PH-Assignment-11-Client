@@ -11,6 +11,7 @@ import {
 } from 'firebase/auth';
 
 import { auth } from '../utils/firebase';
+import axiosInstance from '@/utils/axiosInstence';
 
 const AuthContext = createContext({
     user: null,
@@ -24,29 +25,37 @@ const AuthContext = createContext({
 
 export default function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true); // Add loading state
+    const [loading, setLoading] = useState(true);
+
+    const addUserToDB = async user => {
+        try {
+            const response = await axiosInstance.post('/add-user', user);
+            console.log('User successfully added to DB:', response.data);
+        } catch (error) {
+            console.error('Failed to add user to DB:', error.response?.data || error.message);
+        }
+    };
 
     const updateUserProfile = async (displayName, photoURL) => {
-        if (auth.currentUser) {
-            try {
+        try {
+            if (auth.currentUser) {
                 await updateProfile(auth.currentUser, { displayName, photoURL });
-                const updatedUser = auth.currentUser;
-                setUser({ ...updatedUser, displayName, photoURL });
-            } catch (error) {
-                console.error('Error:', error);
+                setUser({ ...auth.currentUser, displayName, photoURL });
             }
+        } catch (error) {
+            console.error('Error updating user profile:', error.message);
         }
     };
 
     const registerWithEmail = async (email, password, displayName, photoURL) => {
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            const user = userCredential.user;
-            setUser(user);
-            updateUserProfile(displayName, photoURL);
-            console.log('User:', user);
+            const newUser = userCredential.user;
+            await updateUserProfile(displayName, photoURL);
+            await addUserToDB(newUser);
+            setUser(newUser);
         } catch (error) {
-            console.error('Error:', error);
+            console.error('Error registering user:', error.message);
             throw error;
         }
     };
@@ -55,11 +64,11 @@ export default function AuthProvider({ children }) {
         const provider = new GoogleAuthProvider();
         try {
             const result = await signInWithPopup(auth, provider);
-            const user = result.user;
-            console.log('User:', user);
-            setUser(user);
+            const googleUser = result.user;
+            await addUserToDB(googleUser);
+            setUser(googleUser);
         } catch (error) {
-            console.error('Error:', error);
+            console.error('Error logging in with Google:', error.message);
             throw error;
         }
     };
@@ -67,11 +76,9 @@ export default function AuthProvider({ children }) {
     const loginWithEmail = async (email, password) => {
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
-            const user = userCredential.user;
-            console.log('User:', user);
-            setUser(user);
+            setUser(userCredential.user);
         } catch (error) {
-            console.error('Error:', error);
+            console.error('Error logging in with email:', error.message);
             throw error;
         }
     };
@@ -80,7 +87,7 @@ export default function AuthProvider({ children }) {
         try {
             await sendPasswordResetEmail(auth, email);
         } catch (error) {
-            console.error('Error:', error);
+            console.error('Error resetting password:', error.message);
             throw error;
         }
     };
@@ -90,14 +97,28 @@ export default function AuthProvider({ children }) {
             await signOut(auth);
             setUser(null);
         } catch (error) {
-            console.error('Error:', error);
+            console.error('Error logging out:', error.message);
         }
     };
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, currentUser => {
+        const unsubscribe = onAuthStateChanged(auth, async currentUser => {
             setUser(currentUser);
-            setLoading(false); // Set loading to false once user state is determined
+            setLoading(false);
+
+            if (currentUser) {
+                try {
+                    await axiosInstance.post('/jwt', currentUser);
+                } catch (error) {
+                    console.error('Error setting JWT token:', error.message);
+                }
+            } else {
+                try {
+                    await axiosInstance.post('/logout', {});
+                } catch (error) {
+                    console.error('Error setting JWT token:', error.message);
+                }
+            }
         });
 
         return () => unsubscribe();
@@ -105,13 +126,13 @@ export default function AuthProvider({ children }) {
 
     const authContextValue = {
         user,
-        loading, // Provide loading state to context
-        updateUserProfile,
+        loading,
         registerWithEmail,
         loginWithGoogle,
         loginWithEmail,
         resetPassword,
         logout,
+        updateUserProfile,
     };
 
     return <AuthContext.Provider value={authContextValue}>{children}</AuthContext.Provider>;
