@@ -1,6 +1,5 @@
 import Page from "@/components/Page.jsx";
 import Section from "@/components/Section.jsx";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useAuth } from "@/contexts/AuthContext.jsx";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Languages, User, BadgeCheck, Star } from "lucide-react";
@@ -8,17 +7,18 @@ import { Button } from "@/components/ui/button.jsx";
 import { useEffect, useState } from "react";
 import axiosInstance from "@/utils/axiosInstence.js";
 import FindTutorSkltn from "@/components/FindTutorSkltn.jsx";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip.jsx";
+import { Link } from "react-router-dom";
 
 function FindTutorsPage() {
   const { user } = useAuth();
 
   const [tutors, setTutors] = useState([]);
-
   useEffect(() => {
     axiosInstance(`/get-prods`)
       .then((res) => {
@@ -107,7 +107,9 @@ function FindTutorsPage() {
                       </div>
 
                       <div className={"flex justify-end basis-1/2"}>
-                        <Button>Details</Button>
+                        <Link to={"/tutor/" + tutor._id}>
+                          <Button>Details</Button>
+                        </Link>
                       </div>
                     </div>
                   </div>
