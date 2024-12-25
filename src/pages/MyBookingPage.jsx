@@ -1,53 +1,64 @@
 import Page from "@/components/Page.jsx";
 import Section from "@/components/Section.jsx";
-import { useAuth } from "@/contexts/AuthContext.jsx";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Languages, User, BadgeCheck, Star } from "lucide-react";
-import { Button } from "@/components/ui/button.jsx";
-import { useEffect, useState } from "react";
-import axiosInstance from "@/utils/axiosInstence.js";
 import FindTutorSkltn from "@/components/FindTutorSkltn.jsx";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card.jsx";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar.jsx";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip.jsx";
+import { BadgeCheck, Languages, Star, User } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button.jsx";
+import { useEffect, useState } from "react";
+import axiosInstance from "@/utils/axiosInstence.js";
+import { useAuth } from "@/contexts/AuthContext.jsx";
 
-function FindTutorsPage() {
+function MyBookingPage(props) {
   const { user } = useAuth();
+  const [myBookings, setMyBookings] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const [tutors, setTutors] = useState([]);
   useEffect(() => {
-    axiosInstance(`/get-prods`)
+    axiosInstance(`/get-my-bookings/${user?.uid}`)
       .then((res) => {
-        setTutors(res.data);
+        setLoading(true);
+        setMyBookings(res.data);
+        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
-      });
-  }, []);
-
-  console.log(tutors);
+      })
+      .finally(() => setLoading(false));
+  }, [user]);
 
   return (
     <Page>
       <Section>
         <h1>Find Tutors</h1>
       </Section>
-      {!tutors || tutors.length === 0 ? (
+      {loading ? (
         <FindTutorSkltn />
       ) : (
         <Section>
           <div className="grid grid-cols-2 gap-4">
-            {tutors.map((tutor) => (
+            {myBookings?.map((booking) => (
               <Card
-                key={tutor._id}
+                key={booking._id}
                 className="bg-card dark:bg-dark-card flex p-2"
               >
                 <Avatar className={"h-[100px] w-[100px] rounded-md"}>
-                  <AvatarImage src={tutor?.photoUrl} />
+                  <AvatarImage src={booking?.user?.photoURL} />
                   <AvatarFallback className={"rounded-md font-bold"}>
                     DP
                   </AvatarFallback>
@@ -59,7 +70,7 @@ function FindTutorsPage() {
                         <CardTitle
                           className={"text-2xl flex items-center gap-2"}
                         >
-                          {tutor?.user?.displayName}{" "}
+                          {booking?.user?.displayName}{" "}
                           <Tooltip>
                             <TooltipTrigger>
                               <BadgeCheck />
@@ -71,13 +82,15 @@ function FindTutorsPage() {
                       <div className={"flex flex-col gap-2"}>
                         <p className={"flex items-center gap-2"}>
                           <Languages />
-                          <span>{tutor?.language}</span>
+                          <span>{booking?.language}</span>
                         </p>
 
                         <p className={"flex items-center gap-2"}>
                           <User />
                           <span>
-                            {!tutor?.studentCount ? 0 : tutor?.studentCount}
+                            {!booking?.tutor?.studentCount
+                              ? 0
+                              : booking?.tutor?.studentCount}
                             Active Students
                           </span>
                         </p>
@@ -93,7 +106,7 @@ function FindTutorsPage() {
                           >
                             <Star /> 5
                           </strong>
-                          <span>{tutor?.reviews} reviews</span>
+                          <span>{booking?.reviews} reviews</span>
                         </div>
                         <div className={""}>
                           <strong
@@ -101,14 +114,14 @@ function FindTutorsPage() {
                               "flex items-center gap-1 font-extrabold text-xl"
                             }
                           >
-                            BDT {tutor?.price}
+                            BDT {booking?.price}
                           </strong>
                           <span>per-hour</span>
                         </div>
                       </div>
 
                       <div className={"flex justify-end basis-1/2"}>
-                        <Link to={"/tutor/" + tutor._id}>
+                        <Link to={"/tutor/" + booking.tutorId}>
                           <Button>Details</Button>
                         </Link>
                       </div>
@@ -124,4 +137,4 @@ function FindTutorsPage() {
   );
 }
 
-export default FindTutorsPage;
+export default MyBookingPage;

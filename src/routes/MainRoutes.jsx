@@ -9,6 +9,9 @@ import PrivateRoute from "@/components/PrivateRoute.jsx";
 import FindTutorsPage from "@/pages/FindTutorsPage.jsx";
 import Error from "@/pages/Error.jsx";
 import TutorDetailsPage from "@/pages/TutorDetailsPage.jsx";
+import MyBookingPage from "@/pages/MyBookingPage.jsx";
+import MyTutorialsPage from "@/pages/MyTutorialsPage.jsx";
+import UpdateTutorPage from "@/pages/UpdateTutorPage.jsx";
 const ROUTES = createBrowserRouter([
   {
     path: "/",
@@ -45,6 +48,22 @@ const ROUTES = createBrowserRouter([
       {
         path: "tutor/:details",
         element: <TutorDetailsPage />,
+      },
+      {
+        path: "my-bookings",
+        element: (
+          <PrivateRoute>
+            <MyBookingPage />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "my-tutorials",
+        element: <MyTutorialsPage />,
+      },
+      {
+        path: "update-tutor/:id",
+        element: <UpdateTutorPage />,
       },
     ],
   },

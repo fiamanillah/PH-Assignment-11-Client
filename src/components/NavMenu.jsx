@@ -17,6 +17,14 @@ const LINKS = [
     name: "Find Tutor",
     path: "find-tutor",
   },
+  {
+    name: "My Bookings",
+    path: "my-bookings",
+  },
+  {
+    name: "My Tutorials",
+    path: "my-tutorials",
+  },
 ];
 
 export default function NavMenu() {
