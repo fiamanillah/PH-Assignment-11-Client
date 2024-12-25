@@ -12,6 +12,7 @@ import TutorDetailsPage from "@/pages/TutorDetailsPage.jsx";
 import MyBookingPage from "@/pages/MyBookingPage.jsx";
 import MyTutorialsPage from "@/pages/MyTutorialsPage.jsx";
 import UpdateTutorPage from "@/pages/UpdateTutorPage.jsx";
+import CategoriesPage from "@/pages/CategoriesPage.jsx";
 const ROUTES = createBrowserRouter([
   {
     path: "/",
@@ -64,6 +65,10 @@ const ROUTES = createBrowserRouter([
       {
         path: "update-tutor/:id",
         element: <UpdateTutorPage />,
+      },
+      {
+        path: "category/:category",
+        element: <CategoriesPage />,
       },
     ],
   },
