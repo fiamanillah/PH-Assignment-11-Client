@@ -59,7 +59,6 @@ export default function Header() {
                       </PopoverTrigger>
                       <PopoverContent className="w-full text-center flex flex-col gap-2">
                         <p>{user.displayName}</p>
-                        <Button variant="secondary"> View Profile</Button>
                       </PopoverContent>
                     </Popover>
                   </TooltipTrigger>
