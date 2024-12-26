@@ -95,7 +95,7 @@ function TutorDetails({ tutor }) {
   if (!tutor) {
     return <div>Loading...</div>;
   }
-
+  //
   return (
     <div className="flex justify-start">
       <Card className="bg-transparent dark:bg-transparent border-none shadow-none flex flex-col items-end p-2 w-full">
