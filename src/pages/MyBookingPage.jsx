@@ -18,28 +18,35 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip.jsx";
 import { BadgeCheck, Languages, Star, User } from "lucide-react";
-import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button.jsx";
 import { useEffect, useState } from "react";
 import axiosInstance from "@/utils/axiosInstence.js";
 import { useAuth } from "@/contexts/AuthContext.jsx";
+import { useToast } from "@/hooks/use-toast.js";
 
 function MyBookingPage() {
   const { user } = useAuth();
   const [myBookings, setMyBookings] = useState([]);
   const [loading, setLoading] = useState(false);
+  const { toast } = useToast();
 
   useEffect(() => {
-    axiosInstance(`/get-my-bookings/${user?.uid}`)
-      .then((res) => {
-        setLoading(true);
-        setMyBookings(res.data);
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => setLoading(false));
+    const fetchBookings = async () => {
+      if (!user?.uid) return; // Ensure user is available before making the request
+
+      setLoading(true); // Set loading to true before the request begins
+      try {
+        const response = await axiosInstance(`/get-my-bookings/${user.uid}`);
+        setMyBookings(response.data); // Set the fetched data
+        console.log(response.data);
+      } catch (error) {
+        console.error(error); // Handle errors
+      } finally {
+        setLoading(false); // Always set loading to false after the request
+      }
+    };
+
+    fetchBookings();
   }, [user]);
 
   console.log(myBookings);
@@ -47,15 +54,23 @@ function MyBookingPage() {
     try {
       const response = await axiosInstance.put(`/add-review/${id}`);
       console.log("Added review:", response.data);
+      toast({
+        variant: "success",
+        description: "Review added successfully!",
+      });
     } catch (error) {
       console.error("Error adding review:", error);
+      toast({
+        variant: "destructive",
+        description: "Error adding review!",
+      });
     }
   };
 
   return (
     <Page>
       <Section>
-        <h1>Find Tutors</h1>
+        <h1>My Bookings</h1>
       </Section>
       {loading ? (
         <FindTutorSkltn />
@@ -153,6 +168,26 @@ function MyBookingPage() {
           </div>
         </Section>
       )}
+
+      <div className="absolute inset-0 -z-10 transform-gpu overflow-hidden blur-[80px] flex justify-end items-start">
+        <div
+          style={{
+            clipPath:
+              "polygon(0% 0%, 17.75% 16%, 46.75% 84.42%, 75% 25%, 78.45% 90.7%, 93.5% 100%, 100% 54.75%, 59.98% 54.07%, 17.75% 16%, 0% 42.25%)",
+          }}
+          className="relative inset-0 aspect-video w-[50vw] bg-gradient-to-tr from-chart-3 to-chart-5  dark:from-dark-chart-3 dark:to-dark-chart-5  opacity-80 dark:opacity-30 "
+        />
+      </div>
+
+      <div className="absolute inset-0 -z-10 transform-gpu overflow-hidden blur-[80px] flex justify-start items-end">
+        <div
+          style={{
+            clipPath:
+              "polygon(89.86% 26%, 100% 0%, 68.77% 21.1%, 69.48% 40.45%, 0% 36.25%, 70.75% 75%, 41.75% 100%, 100% 76.25%, 28.95% 65.42%, 0% 83.25%, 0% 100%)",
+          }}
+          className="relative  inset-0  aspect-video w-[50vw] bg-gradient-to-tr from-chart-3 to-chart-5  dark:from-dark-chart-3 dark:to-dark-chart-5  opacity-80 dark:opacity-30"
+        />
+      </div>
     </Page>
   );
 }

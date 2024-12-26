@@ -20,14 +20,15 @@ import MobileMenu from "@/components/MobileMenu.jsx";
 
 export default function Header() {
   const { user, logout, loading } = useAuth();
+  console.log(user);
   return (
     <Section
       className={
         "bg-card dark:bg-dark-card bg-opacity-10 dark:bg-opacity-10 backdrop-blur-md sticky top-0 z-50 shadow-xl"
       }
     >
-      <div className="flex justify-between items-center">
-        <div className="basis-1/5">
+      <div className="flex justify-between items-center tablet-lg:gap-2">
+        <div className="basis-1/5 tablet-lg:basis-1/2">
           <Link to="/">
             <img
               className="h-12"
@@ -36,13 +37,13 @@ export default function Header() {
             />
           </Link>
         </div>
-        <div className="basis-3/5">
+        <div className="basis-3/5 tablet-lg:hidden">
           <div className={"tablet-lg:hidden"}>
             <NavMenu />
           </div>
         </div>
 
-        <div className="basis-1/5 flex justify-end items-center space-x-2">
+        <div className="basis-1/5 flex justify-end items-center space-x-2 tablet-lg:basis-1/2">
           {loading ? (
             <Loader2 className="animate-spin h-5 w-5" />
           ) : user ? (

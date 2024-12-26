@@ -25,7 +25,7 @@ export default function Footer() {
           {/* Quick Links Section */}
           <div>
             <h3 className="font-bold text-lg mb-2">Quick Links</h3>
-            <ul className="text-sm">
+            <ul className="text-sm flex flex-col space-y-2">
               <li>
                 <Link
                   to={"/"}
@@ -36,7 +36,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  to={"find-tutor"}
+                  to={"/find-tutor"}
                   className="text-foreground dark:text-dark-foreground"
                 >
                   Find Tutors
