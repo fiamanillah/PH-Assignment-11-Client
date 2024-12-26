@@ -24,7 +24,7 @@ import { useEffect, useState } from "react";
 import axiosInstance from "@/utils/axiosInstence.js";
 import { useAuth } from "@/contexts/AuthContext.jsx";
 
-function MyBookingPage(props) {
+function MyBookingPage() {
   const { user } = useAuth();
   const [myBookings, setMyBookings] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -42,6 +42,16 @@ function MyBookingPage(props) {
       .finally(() => setLoading(false));
   }, [user]);
 
+  console.log(myBookings);
+  const handleAddReview = async (id) => {
+    try {
+      const response = await axiosInstance.put(`/add-review/${id}`);
+      console.log("Added review:", response.data);
+    } catch (error) {
+      console.error("Error adding review:", error);
+    }
+  };
+
   return (
     <Page>
       <Section>
@@ -51,20 +61,24 @@ function MyBookingPage(props) {
         <FindTutorSkltn />
       ) : (
         <Section>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-4 tablet-lg:grid-cols-1">
             {myBookings?.map((booking) => (
               <Card
                 key={booking._id}
-                className="bg-card dark:bg-dark-card flex p-2"
+                className="bg-card dark:bg-dark-card flex p-2 mobile-lg:flex-col mobile-lg:p-0"
               >
-                <Avatar className={"h-[100px] w-[100px] rounded-md"}>
+                <Avatar className={"h-[100px] w-[100px] rounded-md m-2"}>
                   <AvatarImage src={booking?.tutor?.photoUrl} />
                   <AvatarFallback className={"rounded-md font-bold"}>
                     DP
                   </AvatarFallback>
                 </Avatar>
                 <CardContent className={"m-0 p-0 px-4 w-full h-full"}>
-                  <div className={"flex justify-between w-full h-full"}>
+                  <div
+                    className={
+                      "flex justify-between w-full h-full mobile-lg:flex-col mobile-lg:gap-2"
+                    }
+                  >
                     <div className={"basis-1/2"}>
                       <CardHeader className={"m-0 p-0"}>
                         <CardTitle
@@ -106,7 +120,7 @@ function MyBookingPage(props) {
                           >
                             <Star /> 5
                           </strong>
-                          <span>{booking?.reviews} reviews</span>
+                          <span>{booking?.tutor?.reviews} reviews</span>
                         </div>
                         <div className={""}>
                           <strong
@@ -120,10 +134,16 @@ function MyBookingPage(props) {
                         </div>
                       </div>
 
-                      <div className={"flex justify-end basis-1/2"}>
-                        <Link to={"/tutor/" + booking.tutorId}>
-                          <Button>Details</Button>
-                        </Link>
+                      <div
+                        className={"flex justify-end basis-1/2 mobile-lg:mb-2"}
+                      >
+                        <Button
+                          onClick={() => {
+                            handleAddReview(booking?.tutorId);
+                          }}
+                        >
+                          Add Review
+                        </Button>
                       </div>
                     </div>
                   </div>

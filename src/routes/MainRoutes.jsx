@@ -48,7 +48,11 @@ const ROUTES = createBrowserRouter([
       },
       {
         path: "tutor/:details",
-        element: <TutorDetailsPage />,
+        element: (
+          <PrivateRoute>
+            <TutorDetailsPage />,
+          </PrivateRoute>
+        ),
       },
       {
         path: "my-bookings",
@@ -60,11 +64,19 @@ const ROUTES = createBrowserRouter([
       },
       {
         path: "my-tutorials",
-        element: <MyTutorialsPage />,
+        element: (
+          <PrivateRoute>
+            <MyTutorialsPage />,
+          </PrivateRoute>
+        ),
       },
       {
         path: "update-tutor/:id",
-        element: <UpdateTutorPage />,
+        element: (
+          <PrivateRoute>
+            <UpdateTutorPage />,
+          </PrivateRoute>
+        ),
       },
       {
         path: "category/:category",

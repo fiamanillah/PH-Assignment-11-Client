@@ -3,7 +3,7 @@ import { ModeToggle } from "./ModeToggle";
 import NavMenu from "./NavMenu";
 import { Link } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Loader2, LogOut } from "lucide-react";
+import { Loader2, LogOut, AlignJustify } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Popover,
@@ -16,6 +16,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useAuth } from "@/contexts/AuthContext";
+import MobileMenu from "@/components/MobileMenu.jsx";
 
 export default function Header() {
   const { user, logout, loading } = useAuth();
@@ -36,7 +37,9 @@ export default function Header() {
           </Link>
         </div>
         <div className="basis-3/5">
-          <NavMenu />
+          <div className={"tablet-lg:hidden"}>
+            <NavMenu />
+          </div>
         </div>
 
         <div className="basis-1/5 flex justify-end items-center space-x-2">
@@ -92,6 +95,19 @@ export default function Header() {
           )}
 
           <ModeToggle />
+
+          <div className={"hidden tablet-lg:block"}>
+            <Popover>
+              <PopoverTrigger>
+                <Button variant="outline" size="icon">
+                  <AlignJustify />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent align="end" className={"w-48"}>
+                <MobileMenu />
+              </PopoverContent>
+            </Popover>
+          </div>
         </div>
       </div>
     </Section>

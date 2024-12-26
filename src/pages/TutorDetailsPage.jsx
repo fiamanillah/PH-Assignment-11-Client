@@ -26,7 +26,6 @@ function TutorDetailsPage() {
   console.log(tutor);
   return (
     <Page>
-      <Section>Details Page {tutorId}</Section>
       <Section className={"relative"}>
         <div className="flex tablet-lg:flex-col-reverse justify-between items-stretch h-full  bg-opacity-20 my-10 rounded-3xl overflow-hidden shadow-2xl">
           <div className="basis-1/2 bg-primary dark:bg-dark-primary bg-opacity-10 dark:bg-opacity-5 backdrop-blur-sm flex justify-center items-center py-10">

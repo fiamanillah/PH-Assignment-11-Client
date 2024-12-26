@@ -4,6 +4,7 @@ import Categories from "@/Sections/Categories.jsx";
 import Stats from "@/components/Stats.jsx";
 import SuccessStory from "@/components/SuccessStory.jsx";
 import WhyUs from "@/components/WhyUs.jsx";
+import FAQ from "../components/FAQ.jsx";
 export default function HomePage() {
   return (
     <div>
@@ -13,6 +14,7 @@ export default function HomePage() {
         <Categories />
         <SuccessStory />
         <WhyUs />
+        <FAQ />
       </Page>
     </div>
   );

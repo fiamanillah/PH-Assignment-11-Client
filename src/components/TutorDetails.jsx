@@ -161,7 +161,7 @@ function TutorDetails({ tutor }) {
               </div>
             </div>
             <div className={"flex justify-end items-end basis-1/2"}>
-              <Button onClick={handleAddStudent}>"Book Now"</Button>
+              <Button onClick={handleAddStudent}>Book Now</Button>
             </div>
           </div>
         </CardContent>

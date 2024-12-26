@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 function Categories(props) {
   const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
+
   useEffect(() => {
     async function fetchCategories() {
       try {
@@ -23,25 +24,39 @@ function Categories(props) {
   console.log(categories);
 
   return (
-    <Section>
-      <div className="grid grid-cols-3 gap-4">
-        {categories.map((category) => (
-          <div
-            key={category}
-            className="flex justify-start items-center bg-card dark:bg-dark-card p-4 rounded-lg cursor-pointer select-none border-2 border-secondary dark:border-dark-secondary"
-            onClick={() => navigate(`/category/${category}`)}
-          >
-            <div className="text-2xl text-foreground dark:text-dark-foreground flex items-center justify-between gap-2 w-full">
-              <div className="flex items-center gap-1">
-                <Earth />
-                {category}
-              </div>
-              <div>
-                <ChevronRight />
+    <Section className="!py-10">
+      <div className="container mx-auto px-4">
+        {/* Heading and Subheading */}
+        <div className="text-center mb-8">
+          <h2 className=" font-bold text-accent dark:text-dark-accent">
+            Explore Categories
+          </h2>
+          <p className="text-sm text-foreground dark:text-dark-foreground">
+            Discover a variety of topics and subjects to kickstart your learning
+            journey.
+          </p>
+        </div>
+
+        {/* Categories Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {categories.map((category) => (
+            <div
+              key={category}
+              className="flex justify-start items-center bg-card dark:bg-dark-card p-4 rounded-lg cursor-pointer select-none border-2 border-secondary dark:border-dark-secondary"
+              onClick={() => navigate(`/category/${category}`)}
+            >
+              <div className="text-2xl text-foreground dark:text-dark-foreground flex items-center justify-between gap-2 w-full">
+                <div className="flex items-center gap-1">
+                  <Earth />
+                  {category}
+                </div>
+                <div>
+                  <ChevronRight />
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </Section>
   );

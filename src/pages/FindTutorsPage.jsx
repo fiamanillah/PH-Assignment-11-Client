@@ -96,20 +96,24 @@ function FindTutorsPage() {
         </Section>
       ) : (
         <Section>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-4 tablet-lg:grid-cols-1">
             {currentTutors.map((tutor) => (
               <Card
                 key={tutor._id}
-                className="bg-card dark:bg-dark-card flex p-2"
+                className="bg-card dark:bg-dark-card flex p-2 mobile-lg:flex-col mobile-lg:p-0"
               >
-                <Avatar className={"h-[100px] w-[100px] rounded-md"}>
+                <Avatar className={"h-[100px] w-[100px] rounded-md m-2"}>
                   <AvatarImage src={tutor?.photoUrl} />
                   <AvatarFallback className={"rounded-md font-bold"}>
                     DP
                   </AvatarFallback>
                 </Avatar>
                 <CardContent className={"m-0 p-0 px-4 w-full h-full"}>
-                  <div className={"flex justify-between w-full h-full"}>
+                  <div
+                    className={
+                      "flex justify-between w-full h-full mobile-lg:flex-col mobile-lg:gap-2"
+                    }
+                  >
                     <div className={"basis-1/2"}>
                       <CardHeader className={"m-0 p-0"}>
                         <CardTitle
@@ -163,7 +167,9 @@ function FindTutorsPage() {
                         </div>
                       </div>
 
-                      <div className={"flex justify-end basis-1/2"}>
+                      <div
+                        className={"flex justify-end basis-1/2 mobile-lg:mb-2"}
+                      >
                         <Link to={"/tutor/" + tutor._id}>
                           <Button>Details</Button>
                         </Link>

@@ -1,5 +1,4 @@
 import { NavLink } from "react-router-dom";
-
 const LINKS = [
   {
     name: "Home",
@@ -23,11 +22,10 @@ const LINKS = [
     path: "my-tutorials",
   },
 ];
-
-export default function NavMenu() {
+function MobileMenu() {
   return (
-    <div>
-      <ul className="flex justify-center items-center space-x-4">
+    <div className={"w-full"}>
+      <ul className="flex flex-col justify-start items-start  gap-4">
         {LINKS.map((link) => (
           <li key={link.path}>
             <NavLink
@@ -48,3 +46,5 @@ export default function NavMenu() {
     </div>
   );
 }
+
+export default MobileMenu;
