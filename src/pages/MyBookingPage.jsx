@@ -58,7 +58,7 @@ function MyBookingPage(props) {
                 className="bg-card dark:bg-dark-card flex p-2"
               >
                 <Avatar className={"h-[100px] w-[100px] rounded-md"}>
-                  <AvatarImage src={booking?.user?.photoURL} />
+                  <AvatarImage src={booking?.tutor?.photoUrl} />
                   <AvatarFallback className={"rounded-md font-bold"}>
                     DP
                   </AvatarFallback>

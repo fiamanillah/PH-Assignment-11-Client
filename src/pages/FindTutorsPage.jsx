@@ -1,10 +1,11 @@
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Page from "@/components/Page.jsx";
 import Section from "@/components/Section.jsx";
 import { useAuth } from "@/contexts/AuthContext.jsx";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Languages, User, BadgeCheck, Star } from "lucide-react";
 import { Button } from "@/components/ui/button.jsx";
-import { useEffect, useState } from "react";
 import axiosInstance from "@/utils/axiosInstence.js";
 import FindTutorSkltn from "@/components/FindTutorSkltn.jsx";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -13,35 +14,90 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip.jsx";
-import { Link } from "react-router-dom";
+import { Input } from "@/components/ui/input.jsx";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 
 function FindTutorsPage() {
   const { user } = useAuth();
-
   const [tutors, setTutors] = useState([]);
+  const [searchQuery, setSearchQuery] = useState(""); // State for search query
+  const [filteredTutors, setFilteredTutors] = useState([]); // State for filtered tutors
+  const [loading, setLoading] = useState(false);
+
+  // Pagination states
+  const [currentPage, setCurrentPage] = useState(1);
+  const tutorsPerPage = 6; // Number of tutors per page
+
   useEffect(() => {
-    axiosInstance(`/get-prods`)
-      .then((res) => {
-        setTutors(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const fetchTutors = async () => {
+      setLoading(true);
+      try {
+        const response = await axiosInstance(`/get-prods`);
+        setTutors(response.data);
+        setFilteredTutors(response.data); // Initialize filteredTutors with the complete list
+      } catch (error) {
+        console.error("Failed to fetch tutors:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchTutors();
   }, []);
 
-  console.log(tutors);
+  useEffect(() => {
+    // Filter tutors based on search query
+    const query = searchQuery.toLowerCase();
+    const filtered = tutors.filter(
+      (tutor) =>
+        tutor?.user?.displayName?.toLowerCase().includes(query) ||
+        tutor?.language?.toLowerCase().includes(query),
+    );
+    setFilteredTutors(filtered);
+    setCurrentPage(1); // Reset to the first page when the search query changes
+  }, [searchQuery, tutors]);
+
+  // Get current tutors for the page
+  const indexOfLastTutor = currentPage * tutorsPerPage;
+  const indexOfFirstTutor = indexOfLastTutor - tutorsPerPage;
+  const currentTutors = filteredTutors.slice(
+    indexOfFirstTutor,
+    indexOfLastTutor,
+  );
+
+  // Total pages
+  const totalPages = Math.ceil(filteredTutors.length / tutorsPerPage);
 
   return (
     <Page>
       <Section>
         <h1>Find Tutors</h1>
+        {/* Search Input */}
+        <Input
+          type="text"
+          placeholder="Search tutors by name or language..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="border border-gray-300 p-2 rounded-md w-full mb-4"
+        />
       </Section>
-      {!tutors || tutors.length === 0 ? (
+      {loading ? (
         <FindTutorSkltn />
+      ) : filteredTutors.length === 0 ? (
+        <Section>
+          <p>No tutors found. Try a different search query.</p>
+        </Section>
       ) : (
         <Section>
           <div className="grid grid-cols-2 gap-4">
-            {tutors.map((tutor) => (
+            {currentTutors.map((tutor) => (
               <Card
                 key={tutor._id}
                 className="bg-card dark:bg-dark-card flex p-2"
@@ -77,7 +133,7 @@ function FindTutorsPage() {
                         <p className={"flex items-center gap-2"}>
                           <User />
                           <span>
-                            {!tutor?.studentCount ? 0 : tutor?.studentCount}
+                            {!tutor?.studentCount ? 0 : tutor?.studentCount}{" "}
                             Active Students
                           </span>
                         </p>
@@ -118,6 +174,49 @@ function FindTutorsPage() {
               </Card>
             ))}
           </div>
+
+          {/* ShadCN Pagination */}
+          <Pagination
+            className={
+              "prose-a:!text-foreground prose-a:dark:!text-dark-foreground my-4"
+            }
+          >
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious
+                  href="#"
+                  onClick={() =>
+                    setCurrentPage((prev) => Math.max(prev - 1, 1))
+                  }
+                  disabled={currentPage === 1}
+                />
+              </PaginationItem>
+              {Array.from({ length: totalPages }, (_, index) => (
+                <PaginationItem key={index}>
+                  <PaginationLink
+                    href="#"
+                    onClick={() => setCurrentPage(index + 1)}
+                    className={`${
+                      currentPage === index + 1
+                        ? "bg-accent text-white"
+                        : "hover:bg-gray-200"
+                    }`}
+                  >
+                    {index + 1}
+                  </PaginationLink>
+                </PaginationItem>
+              ))}
+              <PaginationItem>
+                <PaginationNext
+                  href="#"
+                  onClick={() =>
+                    setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+                  }
+                  disabled={currentPage === totalPages}
+                />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
         </Section>
       )}
     </Page>

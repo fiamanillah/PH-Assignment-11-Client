@@ -80,7 +80,7 @@ function MyTutorialsPage() {
                 className="bg-card dark:bg-dark-card flex p-2"
               >
                 <Avatar className="h-[100px] w-[100px] rounded-md">
-                  <AvatarImage src={tutor?.user?.photoURL} />
+                  <AvatarImage src={tutor?.photoUrl} />
                   <AvatarFallback className="rounded-md font-bold">
                     DP
                   </AvatarFallback>

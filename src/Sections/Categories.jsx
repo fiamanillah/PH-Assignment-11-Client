@@ -28,7 +28,7 @@ function Categories(props) {
         {categories.map((category) => (
           <div
             key={category}
-            className="flex justify-start items-center bg-card dark:bg-dark-card p-4 rounded-lg cursor-pointer select-none"
+            className="flex justify-start items-center bg-card dark:bg-dark-card p-4 rounded-lg cursor-pointer select-none border-2 border-secondary dark:border-dark-secondary"
             onClick={() => navigate(`/category/${category}`)}
           >
             <div className="text-2xl text-foreground dark:text-dark-foreground flex items-center justify-between gap-2 w-full">

@@ -20,10 +20,10 @@ const typo = {
         '[class~="dark"] &': { color: colors.dark.foreground },
       },
       h2: {
-        color: colors.primary.DEFAULT,
+        color: colors.accent.DEFAULT,
         fontSize: "2rem",
         fontWeight: "500",
-        '[class~="dark"] &': { color: colors.dark.primary.DEFAULT },
+        '[class~="dark"] &': { color: colors.dark.accent.DEFAULT },
       },
       input: {
         color: colors.foreground,
@@ -42,10 +42,10 @@ const typo = {
         '[class~="dark"] &': { color: colors.dark.foreground },
       },
       h3: {
-        color: colors.primary.DEFAULT,
-        fontSize: "1.75rem",
+        color: colors.primary.foreground,
+        fontSize: "1.8rem",
         fontWeight: "400",
-        '[class~="dark"] &': { color: colors.dark.primary.DEFAULT },
+        '[class~="dark"] &': { color: colors.dark.primary.foreground },
       },
       h4: {
         color: colors.primary.DEFAULT,
@@ -74,11 +74,11 @@ const typo = {
       },
       blockquote: {
         fontStyle: "italic",
-        borderLeft: `4px solid ${colors.primary.DEFAULT}`,
+        borderLeft: `4px solid ${colors.secondary.DEFAULT}`,
         paddingLeft: "1rem",
         marginLeft: "0",
-        color: colors.primary.DEFAULT,
-        '[class~="dark"] &': { color: colors.dark.primary.DEFAULT },
+        color: colors.secondary.DEFAULT,
+        '[class~="dark"] &': { color: colors.dark.secondary.DEFAULT },
       },
       code: {
         color: colors.accent.DEFAULT,

@@ -15,16 +15,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip.jsx";
-import {
-  BadgeCheck,
-  Languages,
-  Star,
-  User,
-  IdCard,
-  Mail,
-  Plus,
-  Loader2,
-} from "lucide-react";
+import { BadgeCheck, Languages, Star, User, Mail, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button.jsx";
 import { useAuth } from "@/contexts/AuthContext.jsx";
 import axiosInstance from "@/utils/axiosInstence.js";
@@ -110,7 +101,7 @@ function TutorDetails({ tutor }) {
       <Card className="bg-transparent dark:bg-transparent border-none shadow-none flex flex-col items-end p-2 w-full">
         <div className={"flex justify-between w-full items-center gap-3"}>
           <Avatar className={"h-[100px] w-[100px] rounded-md"}>
-            <AvatarImage src={tutor?.user?.photoURL} />
+            <AvatarImage src={tutor?.photoUrl} />
             <AvatarFallback className={"rounded-md font-bold"}>
               DP
             </AvatarFallback>
@@ -164,10 +155,6 @@ function TutorDetails({ tutor }) {
                 </p>
 
                 <p className={"flex items-center gap-2"}>
-                  <IdCard />
-                  <span>{tutor?.user?._id}</span>
-                </p>
-                <p className={"flex items-center gap-2"}>
                   <Mail />
                   <span>{tutor?.user?.email}</span>
                 </p>
@@ -183,6 +170,8 @@ function TutorDetails({ tutor }) {
             "bg-muted/50 dark:bg-dark-muted/40 p-3 rounded-lg my-4 w-full"
           }
         >
+          <strong className={"!mb-4"}>Description:</strong>
+          <br />
           {tutor?.description}
         </CardDescription>
       </Card>
