@@ -3,6 +3,7 @@ import Page from "@/components/Page.jsx";
 import Categories from "@/Sections/Categories.jsx";
 import Stats from "@/components/Stats.jsx";
 import SuccessStory from "@/components/SuccessStory.jsx";
+import WhyUs from "@/components/WhyUs.jsx";
 export default function HomePage() {
   return (
     <div>
@@ -11,6 +12,7 @@ export default function HomePage() {
         <Stats />
         <Categories />
         <SuccessStory />
+        <WhyUs />
       </Page>
     </div>
   );
