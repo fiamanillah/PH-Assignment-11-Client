@@ -1,11 +1,11 @@
-import axios from 'axios';
+import axios from "axios";
 
 const axiosInstance = axios.create({
-    baseURL: 'http://localhost:3000',
-    withCredentials: true, // Allow cookies to be sent with requests
-    headers: {
-        'Content-Type': 'application/json',
-    },
+  baseURL: "https://ph-a11-backend.vercel.app/",
+  withCredentials: true, // Allow cookies to be sent with requests
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 
 export default axiosInstance;
