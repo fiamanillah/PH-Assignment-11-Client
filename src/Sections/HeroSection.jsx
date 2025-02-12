@@ -1,5 +1,6 @@
 import Section from "../components/Section";
 import { Button } from "@/components/ui/button.jsx";
+import { Link } from "react-router-dom";
 function HeroSection() {
   return (
     <Section className={"relative !py-10"}>
@@ -46,14 +47,15 @@ function HeroSection() {
               </h2>
             </div>
             <div className={"flex gap-4 mt-10"}>
-              <Button
-                className={
-                  "bg-secondary dark:bg-secondary hover:bg-secondary/80 dark:hover:bg-secondary/80 text-foreground dark:text-foreground"
-                }
-              >
-                Get Started
-              </Button>
-              <Button>Learn More</Button>
+              <Link to={"/find-tutor"}>
+                <Button
+                  className={
+                    "bg-secondary dark:bg-secondary hover:bg-secondary/80 dark:hover:bg-secondary/80 text-foreground dark:text-foreground"
+                  }
+                >
+                  Get Started
+                </Button>
+              </Link>
             </div>
           </div>
 

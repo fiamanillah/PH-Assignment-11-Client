@@ -99,7 +99,7 @@ function MyBookingPage() {
                         <CardTitle
                           className={"text-2xl flex items-center gap-2"}
                         >
-                          {booking?.user?.displayName}{" "}
+                          {booking?.tutor?.name}{" "}
                           <Tooltip>
                             <TooltipTrigger>
                               <BadgeCheck />
